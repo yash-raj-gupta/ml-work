@@ -8,23 +8,16 @@ import {
 import React from "react";
 import img from "./img.jpg";
 import "./LivePage.css";
-import ReactPlayer from "react-player/youtube";
+import ReactPlayer from "react-player";
 import Navbar from "./Navbar";
+import { useGlobalContext } from '../context/global';
 
 
 const Livepage = () => {
   // const img="";
-  const data = [
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item5", 
-    "Item 6",
-    "Item 7",
-    "Item 8",
-    "Item 9",
-  ];
+  const data=['1','2','3','4','5','5','6',]
+  const {videos} = useGlobalContext()
+
   function selectFunc() {
     document.getElementById("one").style.display = "block";
     document.getElementById("four").style.display = "none";
@@ -70,12 +63,13 @@ const Livepage = () => {
         <Grid item lg={8.8} md={9} xm={8}>
           <div id="one" style={LivePage_SmallerContainer}>
             <Grid container style={LivePage_style} spacing={2}>
-              {data.map((item, index) => (
-                <Grid item key={index}>
+              {videos.map((video) => (
+                <Grid item key={video.title}>
                   <ReactPlayer
-                    url="https://youtu.be/YRBmZIDqSrc?feature=shared"
+                    url={video.videoUrl}
                     height="100%"
                     width="100%"
+                    controls
                   />
                 </Grid>
               ))}
