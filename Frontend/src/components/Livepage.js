@@ -77,12 +77,13 @@ const Livepage = () => {
           </div>
           <div id="four" style={LivePage_SmallerContainer1}>
             <Grid container style={LivePage_style1} spacing={4} lg={10} md={12}>
-              {data.slice(0, 4).map((item, index) => (
-                <Grid item key={index}>
+              {videos.slice(0, 4).map((video) => (
+                <Grid item key={video.title}>
                   <ReactPlayer
-                    url="https://youtu.be/YRBmZIDqSrc?feature=shared"
+                    url={video.videoUrl}
                     height="100%"
                     width="100%"
+                    controls
                   />
                 </Grid>
               ))}
