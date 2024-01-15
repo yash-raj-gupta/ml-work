@@ -33,6 +33,8 @@ const handleUpload = async (e) => {
           body: formData
       })
   
+      if (res.body !== null) 
+      navigate("/analysis");
   setLoading(false)
   getAllVideos()
   setTitle('')
@@ -49,22 +51,22 @@ const handleUpload = async (e) => {
 
       <div className="flex flex-col w-[1124px] h-[323px] mt-[20px] border-[2px] border-purple-500 rounded-md rounded-10 justify-center items-center bg-purple-200 bg-opacity-100">
         <div className="flex flex-col w-[1110px] h-[310px] border-dotted border-[2px] border-purple-500 rounded-md rounded-10  justify-center items-center bg-purple-200 bg-opacity-100">
-          <div className="absolute flex flex-col justify-center items-center ">
+          <div className=" justify-center items-center w-[250px]  ">
             
           <form onSubmit={handleUpload} action="api/upload" method='POST' encType='multipart/form-data'>
                 <div className="input-control upload-con">
-                    <label htmlFor="video">Video</label>
+                    <label htmlFor="video" className="hidden">Video</label>
                     <div className="inner-input">
                         <input 
                             type="file" 
                             name="video" 
                             id="video"
                             accept="video/*"
-                            //hidden
+                            className="w-[250px] h-[40px] text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-viole rounded-md rounded-60"
                             onChange={handleVideo}
                         />
                     </div>
-                    <span className="text-sm">or drop files here</span>
+                    <span className="text-sm mr-[100px] ml-[10px]">or drop files here</span>
 
                      {fileFormatError && (
                      <p style={{ color: "red" }}>
@@ -76,7 +78,7 @@ const handleUpload = async (e) => {
                         <button
                           name="Upload"
                           type="submit"
-                          className=" w-[120px] h-[40px] bg-purple-700 bg-opacity-100 hover:bg-purple-700 hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded mt-[25px]" >
+                          className=" w-[120px] h-[40px] ml-[60px] bg-purple-700 bg-opacity-100 hover:bg-purple-700 hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded mt-[40px]" >
                           Process </button>
                     </div>
                 </div>
