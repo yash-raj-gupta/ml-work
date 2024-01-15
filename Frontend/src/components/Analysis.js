@@ -8,7 +8,7 @@ const Item = ({ title, content }) => {
     <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
       <h2 className="text-lg font-semibold mb-2">{title}</h2>
       <div className="border-t border-gray-300 mb-2"></div>
-      <p>{content}</p>
+      <p className="font-normal">{content}</p>
     </div>
   );
 };
