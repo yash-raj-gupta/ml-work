@@ -4,6 +4,8 @@ import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from '../context/global';
 import mallActivityData from '../log_mall_activity.json'
+import car_fire from '../log_car_fire.json'
+import prison_fight from '../log_prison_fight.json'
 
 
 const DelayedDescription = ({ number, description, delay, color }) => {
@@ -41,12 +43,54 @@ const DelayedDescription = ({ number, description, delay, color }) => {
     </>
   );
 };
+const DelayedDescription1 = ({delay,jsonname}) => {
+  const [showDescription, setShowDescription] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowDescription(true);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [delay]);
+
+  return (
+    <>
+    {showDescription && jsonname===mallActivityData && <div className="rounded-3xl mx-2 my-2 ">
+    <img
+          key={Math.floor(delay/1000)}
+          src={`mallActivityData/img_${Math.floor(delay*(2808/46000))}.png`}
+        />
+    </div>}
+
+    {showDescription && jsonname===prison_fight && <div className="rounded-3xl mx-2 my-2 ">
+    <img
+          key={Math.floor(delay/1000)}
+          src={`prison_fight/img_${Math.floor(delay*(2808/46000))}.png`}
+        />
+    </div>}
+
+    {showDescription && jsonname===car_fire && <div className="rounded-3xl mx-2 my-2 ">
+    <img
+          key={Math.floor(delay/1000)}
+          src={`car_fire/img_${Math.floor(delay*(2808/46000))}.png`}
+        />
+    </div>} 
+    </> 
+  );
+};
 
 
 
 const Analysis = () => {
-  const {videos} = useGlobalContext()
-  const dataKeys = Object.keys(mallActivityData);
+  const {videos} = useGlobalContext();
+  
+  let jsonname=mallActivityData;
+
+  if(videos[videos.length -1].description === 'car_fire.mp4'){ jsonname=car_fire}
+  if(videos[videos.length -1].description === 'prison_fight.mp4'){ jsonname=prison_fight}
+
+  const dataKeys = Object.keys(jsonname);
 
   const videoTimestamps = [
     { start: 0, end: 10 },
@@ -98,8 +142,8 @@ const Analysis = () => {
                 <DelayedDescription
                   key={index}
                   number={videos[videos.length -1].filename}
-                  description={mallActivityData[number]?.description || ''}
-                  color={mallActivityData[number].usual_activity===false?'black':'red'}
+                  description={jsonname[number]?.description || ''}
+                  color={jsonname[number].usual_activity===false?'black':'red'}
                   delay={delay * (46000/2808)} // Convert delay to milliseconds
                 />
               );
@@ -113,15 +157,21 @@ const Analysis = () => {
             Recorded Unusal Activities
           </h1>
           <div className="flex overflow-x-auto">
-            {videoTimestamps.map((timestamps, index) => (
-              <div key={index} className="rounded-3xl mx-2 my-2 ">
-                <div className="rounded-3xl overflow-hidden drop-shadow-xl">
 
-                  <img src="mall_activity/img_1.png" alt="" />
-                  
-                </div>
-              </div>
-            ))}
+
+          {dataKeys.map((number, index) => {
+              const currentNumber = Number(number);
+
+              // Calculate delay as the difference between consecutive numbers
+              const delay = currentNumber ? currentNumber : 0;
+
+              return (
+                <DelayedDescription1
+                  delay={delay * (46000/2808)} // Convert delay to milliseconds
+                  jsonname={jsonname}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
