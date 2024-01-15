@@ -6,7 +6,7 @@ import { useGlobalContext } from '../context/global';
 import mallActivityData from '../log_mall_activity.json'
 
 
-const DelayedDescription = ({ number, description, delay }) => {
+const DelayedDescription = ({ number, description, delay, color }) => {
   const [showDescription, setShowDescription] = useState(false);
 
   useEffect(() => {
@@ -23,6 +23,7 @@ const DelayedDescription = ({ number, description, delay }) => {
        <h2 className="text-lg font-semibold mb-2">{Math.floor(delay/1000)} seconds</h2>
       <div className="border-t border-gray-300 mb-2"></div>
       <p className="font-normal">{description}</p>
+      <p>{color}</p>
     </div>}
     </>
   );
@@ -77,7 +78,6 @@ const Analysis = () => {
             </div>
             {dataKeys.map((number, index) => {
               const currentNumber = Number(number);
-              const nextNumber = Number(dataKeys[index + 1]);
 
               // Calculate delay as the difference between consecutive numbers
               const delay = currentNumber ? currentNumber : 0;
@@ -85,8 +85,9 @@ const Analysis = () => {
               return (
                 <DelayedDescription
                   key={index}
-                  number={number}
+                  number={videos[videos.length -1].filename}
                   description={mallActivityData[number]?.description || ''}
+                  color={mallActivityData[number].usual_activity===false?'black':'red'}
                   delay={delay * (46000/2808)} // Convert delay to milliseconds
                 />
               );
@@ -103,12 +104,9 @@ const Analysis = () => {
             {videoTimestamps.map((timestamps, index) => (
               <div key={index} className="rounded-3xl mx-2 my-2 ">
                 <div className="rounded-3xl overflow-hidden drop-shadow-xl">
-                  <ReactPlayer
-                    url={videos[videos.length -1].videoUrl}
-                    controls
-                    width="250px"
-                    height="148px"
-                  />
+
+                  <img src="mall_activity/img_1.png" alt="" />
+                  
                 </div>
               </div>
             ))}
