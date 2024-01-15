@@ -1,36 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import ReactPlayer from "react-player";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from '../context/global';
+import mallActivityData from '../log_mall_activity.json'
 
 
-const Item = ({ title, content }) => {
+const DelayedDescription = ({ number, description, delay }) => {
+  const [showDescription, setShowDescription] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowDescription(true);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [delay]);
+
   return (
-    <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
-      <h2 className="text-lg font-semibold mb-2">{title}</h2>
+    <>
+    {showDescription && <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
+       <h2 className="text-lg font-semibold mb-2">{Math.floor(delay/1000)} seconds</h2>
       <div className="border-t border-gray-300 mb-2"></div>
-      <p className="font-normal">{content}</p>
-    </div>
+      <p className="font-normal">{description}</p>
+    </div>}
+    </>
   );
 };
 
 
+
 const Analysis = () => {
   const {videos} = useGlobalContext()
+  const dataKeys = Object.keys(mallActivityData);
 
-  const data = [
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 4",
-    "Item 4",
-    "Item 4",
-    "Item 4",
-    "Item 4",
-    "Item 4",
-  ];
   const videoTimestamps = [
     { start: 0, end: 10 },
     { start: 15, end: 25 },
@@ -43,8 +46,6 @@ const Analysis = () => {
     { start: 30, end: 40 },
     { start: 45, end: 55 },
   ];
-
-  const numberOfCards=(videos[videos.length -1].duration)%30;
 
   const navigate = useNavigate();
   function showfullviewhandler(){
@@ -74,13 +75,23 @@ const Analysis = () => {
              <div className="flex justify-end"> 
             <button  onClick={showfullviewhandler} className=" bg-purple-700 bg-opacity-200 hover:bg-purple-700 hover:bg-opacity-80 text-white font-bold py-2 px-3 rounded-lg ">View all</button>
             </div>
-            {[...Array(numberOfCards)].map((_, index) => 
-                <Item
-                key={index}
-                title={`Title ${index + 1}`}
-                content={` Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Itaque saepe dicta fugiat amet minus incidunt quos`}
-                />)}
+            {dataKeys.map((number, index) => {
+              const currentNumber = Number(number);
+              const nextNumber = Number(dataKeys[index + 1]);
+
+              // Calculate delay as the difference between consecutive numbers
+              const delay = currentNumber ? currentNumber : 0;
+
+              return (
+                <DelayedDescription
+                  key={index}
+                  number={number}
+                  description={mallActivityData[number]?.description || ''}
+                  delay={delay * (46000/2808)} // Convert delay to milliseconds
+                />
+              );
+            })}
+            
 
           </div>
         </div>
