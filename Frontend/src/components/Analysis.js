@@ -10,15 +10,28 @@ import prison_fight from '../log_prison_fight.json'
 
 const DelayedDescription = ({ number, description, delay, color }) => {
   const [showDescription, setShowDescription] = useState(false);
+  const [formattedTime, setFormattedTime] = useState('');
+
+  const convertToMinutesAndSeconds = (delay) => {
+    const delayInSeconds = Math.floor(delay / 1000);
+    const minutes = Math.floor(delayInSeconds / 60);
+    const seconds = delayInSeconds % 60;
+
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+  };
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowDescription(true);
     }, delay);
-
+    setFormattedTime(convertToMinutesAndSeconds(delay));
     return () => clearTimeout(timer);
   }, [delay]);
-
+  
   return (
     <>
     {color==='red' && showDescription && <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
@@ -28,6 +41,7 @@ const DelayedDescription = ({ number, description, delay, color }) => {
     </div>}
     {color==='black' && showDescription && <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
        <h2 className="text-lg font-semibold mb-2">{Math.floor(delay/1000)} seconds</h2>
+
       <div className="border-t border-gray-300 mb-2"></div>
       <p className="font-normal">{description}</p>
     </div>}
@@ -112,8 +126,7 @@ const Analysis = () => {
             <div className="rounded-3xl overflow-hidden drop-shadow-xl">
               <ReactPlayer
               url={videos[videos.length -1].videoUrl}
-                autoplay
-                controls
+                playing={true}
                 width="539px"
                 height="292px"
               />
