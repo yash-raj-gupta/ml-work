@@ -5,17 +5,45 @@ import {
   faSquare,
   faThLarge,
 } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import React,{useState} from "react";
 import img from "./img.jpg";
 import "./LivePage.css";
-import ReactPlayer from "react-player";
+import ReactPlayer from "react-player/youtube";
 import Navbar from "./Navbar";
 import { useGlobalContext } from '../context/global';
 
 
+const Item = ({ title,time, content }) => {
+  return (
+    <div className="LivePage_inner_div">
+                 <div className="LivePage_flex">
+                   <h5>{title}</h5>
+                   <h5>{time}</h5>
+                 </div>
+                 <div className="LivePage_info">
+                   {content}
+                 </div>
+               </div>
+  );
+};
+const Item1 = ({ title,time, content }) => {
+  return (
+    <div className="LivePage_inner_div">
+                 <div className="LivePage_flex">
+                   <h5>{title}</h5>
+                   <h5>{time}</h5>
+                 </div>
+                 <div className="LivePage_info1">
+                   {content}
+                 </div>
+               </div>
+  );
+};
+
 const Livepage = () => {
   // const img="";
   const data=['1','2','3','4','5','5','6',]
+  const data1=['1','2','3']
   const {videos} = useGlobalContext()
 
   function selectFunc() {
@@ -42,7 +70,7 @@ const Livepage = () => {
       setAllChecked(allchecked.filter((item) => item !== e.target.value));
     }
   }
-  /* const [displayTrue,setDisplay]=useState(false);
+   const [displayTrue,setDisplay]=useState(true);
    function funcOpen()
    {
     if(displayTrue)
@@ -50,15 +78,12 @@ const Livepage = () => {
   else
     setDisplay(true);
    }
-   useEffect(()=>{
-     if(displayTrue)
-     document.getElementById('block').style.display='block'
-    else
-    document.getElementById('block').style.display='none'
-   },[displayTrue] );*/
+   
+   
+  
   return (
     <>
-    <Navbar/>
+    <Navbar active={1}/>
       <Grid container lg={12}>
         <Grid item lg={8.8} md={9} xm={8}>
           <div id="one" style={LivePage_SmallerContainer}>
@@ -98,85 +123,72 @@ const Livepage = () => {
         </Grid>
         <Grid item lg={3.2} md={3} xm={4}>
           <div className="LivePage_color">
-            <Button>
+            <Button onClick={funcOpen}>
               <span className="LivePage_span">
                 <FontAwesomeIcon icon={faCaretDown} size="xl" />
-                Group1
               </span>
+              <span className="LivePage_span">Group1</span>
             </Button>
-            <div id="open">
-              <div>
+          { displayTrue && <div id="open">
+              <div className="LivePage_checkbox">
                 <input value="One" type="checkbox" onChange={handleChange} />
-                <span>CAM1 </span>
+                <span className="LivePage_cam">CAM1</span>
               </div>
-              <div>
+              <div className="LivePage_checkbox">
                 <input value="Two" type="checkbox" onChange={handleChange} />
-                <span> CAM2 </span>
+                <span className="LivePage_cam">CAM2</span>
               </div>
-              <div>
-                <input value="Three" type="checkbox" onChange={handleChange} />
-                <span> CAM3 </span>
+              <div className="LivePage_checkbox">
+                <input  value="Three" type="checkbox" onChange={handleChange} />
+                <span className="LivePage_cam">CAM3</span>
               </div>
-              <div>
-                <input value="Four" type="checkbox" onChange={handleChange} />
-                <span>CAM4 </span>
+              <div className="LivePage_checkbox">
+                <input  value="Four" type="checkbox" onChange={handleChange} />
+                <span className="LivePage_cam">CAM4</span>
               </div>
-              <div>
-                <input value="Five" type="checkbox" onChange={handleChange} />
-                <span> CAM5 </span>
+              <div className="LivePage_checkbox">
+                <input className="LivePage_checkbox" value="Five" type="checkbox" onChange={handleChange} />
+                <span className="LivePage_cam">CAM5</span>
               </div>
-              <div>
-                <input value="Five" type="checkbox" onChange={handleChange} />
-                <span> CAM6 </span>
+              <div className="LivePage_checkbox">
+                <input  value="Six" type="checkbox" onChange={handleChange} />
+                <span className="LivePage_cam">CAM6</span>
               </div>
+              <div className="LivePage_checkbox">
+                <input value="Seven" type="checkbox" onChange={handleChange} />
+                <span className="LivePage_cam">CAM7</span>
+              </div>
+              <div className="LivePage_checkbox">
+                <input  value="Eight" type="checkbox" onChange={handleChange} />
+                <span className="LivePage_cam">CAM8</span>
+              </div>
+            </div>}
+
             </div>
-            <div className="LivePage_outer_div">
-              <h4 className="LivePage_title">Transcriptions</h4>
-              <div className="LivePage_inner_div">
-                <div className="LivePage_flex">
-                  <h5>CAM1</h5>
-                  <h5>02:50PM</h5>
-                </div>
-                <div className="LivePage_info">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Itaque saepe dicta fugiat amet minus incidunt quos,{" "}
-                </div>
-              </div>
-              <div className="LivePage_inner_div">
-                <div className="LivePage_flex">
-                  <h5>CAM5</h5>
-                  <h5>02:50PM</h5>
-                </div>
-                <div className="LivePage_info">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Itaque saepe dicta fugiat amet minus incidunt quos,
-                </div>
-              </div>
+           <div>
+           <h4 className="LivePage_title">Transcriptions</h4>
+           <div id="LivePage_outer_div" className=" bg-[#ECD3FF]  overflow-y-auto overflow-y:scroll">
+           {data1.map((item, index) => (
+               <Item key={index} 
+               title={`CAM ${index + 1}`}
+               time={`2:15PM`}
+               content={`Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+               Itaque saepe dicta fugiat amet minus incidunt quos,{" "}` }/>
+            ))}
             </div>
-            <div className="LivePage_outer_div">
-              <h4 className="LivePage_title">Unusual Activity</h4>
-              <div className="LivePage_inner_div">
-                <div className="LivePage_flex">
-                  <h5>CAM1</h5>
-                  <h5>02:50PM</h5>
-                </div>
-                <div className="LivePage_info1">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Itaque saepe dicta fugiat amet minus incidunt quos,{" "}
-                </div>
-              </div>
-              <div className="LivePage_inner_div">
-                <div className="LivePage_flex">
-                  <h5>CAM5</h5>
-                  <h5>02:50PM</h5>
-                </div>
-                <div className="LivePage_info1">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Itaque saepe dicta fugiat amet minus incidunt quos,
-                </div>
-              </div>
+           </div>
+             
+           <h4 className="LivePage_title">Unusual Activities</h4>
+           <div id="LivePage_outer_div" className=" bg-[#ECD3FF]  overflow-y-auto overflow-y:scroll">
+           {data1.map((item, index) => (
+               <Item1 key={index} 
+               title={`CAM ${index + 1}`}
+               time={`2:15PM`}
+               content={`Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+               Itaque saepe dicta fugiat amet minus incidunt quos,{" "}` }/>
+            ))}
             </div>
-          </div>
+           
         </Grid>
       </Grid>
       <Appbar>
@@ -202,11 +214,12 @@ const Livepage = () => {
   );
 };
 let Appbar = styled(Box)`
-  background: #5a2a75;
+--tw-bg-opacity: 2;
+background-color: rgb(126 34 206 / var(--tw-bg-opacity));
   bottom: 1px;
   position: fixed;
-  height: 40px;
-  width: 71%;
+  height: 60px;
+  width: 73.5%;
   padding: 10px 20px;
 `;
 let LivePage_style = {
@@ -224,12 +237,6 @@ let LivePage_style2 = {
   margin: " auto",
   marginTop: "50px",
 };
-
-// let LivePage_style4 = {
-//   border: "none",
-//   background: "transparent",
-//   padding: "10px",
-// };
 const LivePage_SmallerContainer = {
   position: "relative",
   top: "40px",
