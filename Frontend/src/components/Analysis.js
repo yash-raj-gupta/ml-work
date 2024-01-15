@@ -21,11 +21,15 @@ const DelayedDescription = ({ number, description, delay, color }) => {
 
   return (
     <>
-    {showDescription && <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
+    {color==='red' && showDescription && <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
+       <h2 className="text-lg font-semibold mb-2">{Math.floor(delay/1000)} seconds</h2>
+      <div className="border-t border-gray-300 mb-2"></div>
+      <p className="font-normal text-red-500">{description}</p>
+    </div>}
+    {color==='black' && showDescription && <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
        <h2 className="text-lg font-semibold mb-2">{Math.floor(delay/1000)} seconds</h2>
       <div className="border-t border-gray-300 mb-2"></div>
       <p className="font-normal">{description}</p>
-      <p>{color}</p>
     </div>}
     </>
   );
