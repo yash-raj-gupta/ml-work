@@ -48,9 +48,8 @@ const Analysis = () => {
 
   const navigate = useNavigate();
   function showfullviewhandler(){
-
    return navigate("/transcript");
-
+   
   }
 
   return (
@@ -63,6 +62,7 @@ const Analysis = () => {
             <div className="rounded-3xl overflow-hidden drop-shadow-xl">
               <ReactPlayer
               url={videos[videos.length -1].videoUrl}
+                autoplay
                 controls
                 width="539px"
                 height="292px"
@@ -78,7 +78,8 @@ const Analysis = () => {
                 <Item
                 key={index}
                 title={`Title ${index + 1}`}
-                content={`Content for ${index}`}
+                content={` Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Itaque saepe dicta fugiat amet minus incidunt quos`}
                 />)}
 
           </div>
