@@ -2,6 +2,8 @@ import React from "react";
 import ReactPlayer from "react-player";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from '../context/global';
+
 
 const Item = ({ title, content }) => {
   return (
@@ -15,6 +17,8 @@ const Item = ({ title, content }) => {
 
 
 const Analysis = () => {
+  const {videos} = useGlobalContext()
+
   const data = [
     "Item 1",
     "Item 2",
@@ -27,7 +31,6 @@ const Analysis = () => {
     "Item 4",
     "Item 4",
   ];
-  const videoUrl = "https://www.youtube.com/watch?v=_qDML_BCju8";
   const videoTimestamps = [
     { start: 0, end: 10 },
     { start: 15, end: 25 },
@@ -57,7 +60,7 @@ const Analysis = () => {
             <h1 className="mb-3 text-medium text-[25px]">Uploaded Video</h1>
             <div className="rounded-3xl overflow-hidden drop-shadow-xl">
               <ReactPlayer
-                url={videoUrl}
+              url={videos[videos.length -1].videoUrl}
                 controls
                 width="539px"
                 height="292px"
@@ -88,7 +91,7 @@ const Analysis = () => {
               <div key={index} className="rounded-3xl mx-2 my-2 ">
                 <div className="rounded-3xl overflow-hidden drop-shadow-xl">
                   <ReactPlayer
-                    url={`${videoUrl}#t=${timestamps.start},${timestamps.end}`}
+                    url={videos[videos.length -1].videoUrl}
                     controls
                     width="250px"
                     height="148px"
