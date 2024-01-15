@@ -17,11 +17,32 @@ function Uploadvideopage() {
   const {getAllVideos} = useGlobalContext()
 
   const handleVideo = (e) => {
-    setVideo(e.target.files[0])
-    setLabel('Your Video: ' + e.target.files[0].name)
+   
+    const file =e.target.files[0];
+      // Check if a file is selected
+      if (file) {
+
+        const videodatatype = file.name.split(".")[1].toLowerCase();
+        // Check the file format (e.g., allow only image files)
+        const allowedFormats = ["mp4"];
+        if (allowedFormats.includes(videodatatype)) {
+          
+          setVideo(e.target.files[0])
+          setFileFormatError(false);
+          setLabel('Your Video: ' + e.target.files[0].name)
+        }
+        else {
+          // setSelectedFile(null);
+          setVideo(null)
+          setFileFormatError(true);
+        }
+      }
+
 };
 
 const handleUpload = async (e) => {
+  const file =e.target.video.files[0];
+  if(file){
   e.preventDefault();
   setLoading(true);
 
@@ -41,6 +62,7 @@ const handleUpload = async (e) => {
   setDescription('')
   setVideo(null)
   setLabel('Upload your video...')
+    }
 };
 
   return (
@@ -61,7 +83,7 @@ const handleUpload = async (e) => {
                             type="file" 
                             name="video" 
                             id="video"
-                            accept="video/*"
+                            // accept="video/*"
                             className="w-[250px] h-[40px] text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-viole rounded-md rounded-60"
                             onChange={handleVideo}
                         />
@@ -70,7 +92,7 @@ const handleUpload = async (e) => {
 
                      {fileFormatError && (
                      <p style={{ color: "red" }}>
-                      Invalid file format. Please choose a mp_4 video file.
+                      Please choose a mp_4 video file.
                     </p>
                      )}
 
@@ -78,6 +100,7 @@ const handleUpload = async (e) => {
                         <button
                           name="Upload"
                           type="submit"
+                          disabled={video === null}
                           className=" w-[120px] h-[40px] ml-[60px] bg-purple-700 bg-opacity-100 hover:bg-purple-700 hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded mt-[40px]" >
                           Process </button>
                     </div>
