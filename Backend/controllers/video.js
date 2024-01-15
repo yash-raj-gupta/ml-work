@@ -30,7 +30,7 @@ exports.addVideo = async (req, res) => {
         const video = new VideoSchema({
             title,
             description,
-            filename: req.file.filename,
+            filename: req.file.originalname,
             videoUrl: videoPath,
             duration: duration || 0
         });
