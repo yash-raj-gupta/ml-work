@@ -44,6 +44,8 @@ const Analysis = () => {
     { start: 45, end: 55 },
   ];
 
+  const numberOfCards=(videos[videos.length -1].duration)%30;
+
   const navigate = useNavigate();
   function showfullviewhandler(){
 
@@ -72,13 +74,12 @@ const Analysis = () => {
              <div className="flex justify-end"> 
             <button  onClick={showfullviewhandler} className=" bg-purple-700 bg-opacity-200 hover:bg-purple-700 hover:bg-opacity-80 text-white font-bold py-2 px-3 rounded-lg ">View all</button>
             </div>
-            {data.map((item, index) => (
-              <Item
+            {[...Array(numberOfCards)].map((_, index) => 
+                <Item
                 key={index}
                 title={`Title ${index + 1}`}
-                content={`Content for ${item}`}
-              />
-            ))}
+                content={`Content for ${index}`}
+                />)}
 
           </div>
         </div>
