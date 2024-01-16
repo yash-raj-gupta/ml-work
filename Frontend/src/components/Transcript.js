@@ -1,36 +1,68 @@
-import React from "react";
+
+import React, { useState, useEffect } from 'react';
 import ReactPlayer from "react-player";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from '../context/global';
+import mallActivityData from '../log_mall_activity.json'
+import car_fire from '../log_car_fire.json'
+import prison_fight from '../log_prison_fight.json'
 
-const Item = ({ title, content }) => {
+const DelayedDescription = ({ number, description, delay, color }) => {
+  const [showDescription, setShowDescription] = useState(false);
+  const [formattedTime, setFormattedTime] = useState('');
+
+  const convertToMinutesAndSeconds = (delay) => {
+    const delayInSeconds = Math.floor(delay / 1000);
+    const minutes = Math.floor(delayInSeconds / 60);
+    const seconds = delayInSeconds % 60;
+
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+  };
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowDescription(true);
+    }, delay);
+    setFormattedTime(convertToMinutesAndSeconds(delay));
+    return () => clearTimeout(timer);
+  }, [delay]);
+  
   return (
-    <div className="mx-2 my-3 p-3 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
-      <h2 className="text-lg font-semibold mb-2">{title}</h2>
+    <>
+    {color==='red' && showDescription && <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
+       <h2 className="text-lg font-semibold mb-2">{formattedTime}</h2>
       <div className="border-t border-gray-300 mb-2"></div>
-      <p>{content}</p>
-    </div>
+      <p className="font-normal text-red-500">{description}</p>
+    </div>}
+    {color==='black' && showDescription && <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
+       <h2 className="text-lg font-semibold mb-2">{formattedTime}</h2>
+
+      <div className="border-t border-gray-300 mb-2"></div>
+      <p className="font-normal">{description}</p>
+    </div>}
+    </>
   );
 };
 
+
 function Transcript() {
-  const data = [
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 4",
-    "Item 4",
-    "Item 4",
-    "Item 4",
-    "Item 4",
-    "Item 4",
-  ];
   const navigate = useNavigate();
   function showfullviewhandler() {
     return navigate("/analysis");
   }
-  const videoUrl = "https://www.youtube.com/watch?v=_qDML_BCju8";
+  const {videos} = useGlobalContext();
+  
+  let jsonname=mallActivityData;
+  let dataKeys = Object.keys(mallActivityData);
+  if(videos[videos.length -1]?.description === 'car_fire.mp4'){ jsonname=car_fire
+  dataKeys = Object.keys(car_fire)}
+  if(videos[videos.length -1]?.description === 'prison_fight.mp4'){ jsonname=prison_fight 
+    dataKeys = Object.keys(prison_fight)}
   return (
     <>
       <Navbar active={4} />
@@ -44,13 +76,23 @@ function Transcript() {
               Back
             </button>
 
-            {data.map((item, index) => (
-              <Item
-                key={index}
-                title={`Title ${index + 1}`}
-                content={`Content for ${item}`}
-              />
-            ))}
+            {dataKeys.map((number, index) => {
+              const currentNumber = Number(number);
+
+              // Calculate delay as the difference between consecutive numbers
+              const delay = currentNumber ? currentNumber : 0;
+
+              return (
+                <DelayedDescription
+                  key={index}
+                  number={videos[videos.length -1]?.filename}
+                  description={jsonname[number]?.description || ''}
+                  color={jsonname[number].usual_activity===false?'black':'red'}
+                  delay={delay * (46000/2808)} // Convert delay to milliseconds
+                />
+              );
+            })}
+            
           </div>
         </div>
       </div>

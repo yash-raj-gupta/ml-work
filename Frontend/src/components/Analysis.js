@@ -107,20 +107,7 @@ const Analysis = () => {
   if(videos[videos.length -1]?.description === 'prison_fight.mp4'){ jsonname=prison_fight 
     dataKeys = Object.keys(prison_fight)}
 
-  
 
-  const videoTimestamps = [
-    { start: 0, end: 10 },
-    { start: 15, end: 25 },
-    { start: 30, end: 40 },
-    { start: 45, end: 55 },
-    { start: 30, end: 40 },
-    { start: 45, end: 55 },
-    { start: 30, end: 40 },
-    { start: 45, end: 55 },
-    { start: 30, end: 40 },
-    { start: 45, end: 55 },
-  ];
 
   const navigate = useNavigate();
   function showfullviewhandler(){
