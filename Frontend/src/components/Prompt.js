@@ -18,9 +18,9 @@ function Prompt() {
                         </div>
                     </li>
                     {isChatVisible && (
-                        <li style={{ position: 'absolute', top: '-130px', left: '-180px' }}>
+                        <li style={{ position: 'absolute', top: '-210px', left: '-180px' }}>
                             <div className="">
-                                <textarea type="text" placeholder='Ask Something here' rows="4" cols="30" className='border-2 rounded-xl border-purple-900 text-center' />
+                                <textarea type="text" placeholder='Enter your Prompt here' rows="8" cols="40" className='border-2 rounded-xl border-purple-900 text-center' />
                             </div>
                         </li>
                     )}

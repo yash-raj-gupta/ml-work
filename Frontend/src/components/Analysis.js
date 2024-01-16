@@ -6,23 +6,24 @@ import { useGlobalContext } from '../context/global';
 import mallActivityData from '../log_mall_activity.json'
 import car_fire from '../log_car_fire.json'
 import prison_fight from '../log_prison_fight.json'
+import "./LivePage.css";
 
+const convertToMinutesAndSeconds = (delay) => {
+  const delayInSeconds = Math.floor(delay / 1000);
+  const minutes = Math.floor(delayInSeconds / 60);
+  const seconds = delayInSeconds % 60;
+
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+  const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+  return `${formattedMinutes}:${formattedSeconds}`;
+};
 
 const DelayedDescription = ({ number, description, delay, color }) => {
   const [showDescription, setShowDescription] = useState(false);
   const [formattedTime, setFormattedTime] = useState('');
 
-  const convertToMinutesAndSeconds = (delay) => {
-    const delayInSeconds = Math.floor(delay / 1000);
-    const minutes = Math.floor(delayInSeconds / 60);
-    const seconds = delayInSeconds % 60;
-
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
-
-    return `${formattedMinutes}:${formattedSeconds}`;
-  };
-
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -50,47 +51,56 @@ const DelayedDescription = ({ number, description, delay, color }) => {
 };
 const DelayedDescription1 = ({delay,jsonname}) => {
   const [showDescription, setShowDescription] = useState(false);
-
+  const [formattedTime, setFormattedTime] = useState('');
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowDescription(true);
     }, delay);
-
+    setFormattedTime(convertToMinutesAndSeconds(delay));
     return () => clearTimeout(timer);
   }, [delay]);
 
   return (
     <div>
     {showDescription && jsonname===mallActivityData && 
-    (<div className="rounded-3xl mx-2 my-2 ">
+    (<div className="rounded-3xl mx-2 my-2 p-1 w-[250px] h-[188px]">
+      <div className='flex flex-row-reverse pr-4'>
+         <h2 className="text-lg font-semibold mb-2 ">{formattedTime}</h2>
+         </div>
     <img
           key={Math.floor(delay/1000)}
           src={`mallActivityData/img_${Math.floor(delay*(2808/46000))}.png`}
           width={250}
           height={188}
-          className='rounded-3xl min-h[188px] min-w-[250px]'
+          className='rounded-3xl min-h[158px] min-w-[186px]'
         />
     </div>)}
 
-    {showDescription && jsonname===prison_fight && <div className="rounded-3xl mx-2 my-2 ">
+    {showDescription && jsonname===prison_fight && (<div className="rounded-3xl mx-2 my-2 p-1 w-[250px] h-[188px]">
+      <div className='flex flex-row-reverse pr-4'>
+         <h2 className="text-lg font-semibold mb-2 ">{formattedTime}</h2>
+         </div>
     <img
           key={Math.floor(delay/1000)}
           src={`prison_fight/img_${Math.floor(delay*(2808/46000))}.png`}
           width={250}
           height={188}
-          className='rounded-3xl min-h[168px] min-w-[250px]'
+          className='rounded-3xl min-h[158px] min-w-[186px]'
         />
-    </div>}
+    </div>)}
 
-    {showDescription && jsonname===car_fire && <div className="rounded-3xl mx-2 my-2 ">
+    {showDescription && jsonname===car_fire && (<div className="rounded-3xl mx-2 my-2 p-1 w-[250px] h-[188px]">
+      <div className='flex flex-row-reverse pr-4'>
+         <h2 className="text-lg font-semibold mb-2 ">{formattedTime}</h2>
+         </div>
     <img
           key={Math.floor(delay/1000)}
           src={`car_fire/img_${Math.floor(delay*(2808/46000))}.png`}
           width={250}
           height={188}
-          className='rounded-3xl min-h[188px] min-w-[250px]'
+          className='rounded-3xl min-h[158px] min-w-[186px]'
         />
-    </div>} 
+    </div>)} 
     </div> 
   );
 };
@@ -134,7 +144,7 @@ const Analysis = () => {
               />
             </div>
           </div>
-          <div className=" bg-[#ECD3FF] w-[869px]  top-[80px] p-8 overflow-y-auto scrollbar-hide">
+          <div className=" bg-[#ECD3FF] w-[869px]  top-[80px] p-8 overflow-y-auto ">
 
              <div className="flex justify-end"> 
             <button  onClick={showfullviewhandler} className=" bg-purple-700 bg-opacity-200 hover:bg-purple-700 hover:bg-opacity-80 text-white font-bold py-2 px-3 rounded-lg ">View all</button>
@@ -146,6 +156,7 @@ const Analysis = () => {
               const delay = currentNumber ? currentNumber : 0;
 
               return (
+            
                 <DelayedDescription
                   key={index}
                   number={videos[videos.length -1]?.filename}
@@ -153,6 +164,7 @@ const Analysis = () => {
                   color={jsonname[number].usual_activity===false?'black':'red'}
                   delay={delay * (46000/2808)} // Convert delay to milliseconds
                 />
+                
               );
             })}
             

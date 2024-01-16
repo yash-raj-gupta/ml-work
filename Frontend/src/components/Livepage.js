@@ -16,7 +16,7 @@ import car_fire from "../log_car_fire.json";
 import prison_fight from "../log_prison_fight.json";
 import Prompt from "./Prompt";
 
-const DelayedDescription = ({ number, description, delay, color }) => {
+const DelayedDescription = ({ number, description, delay, color, color2 }) => {
   const [showDescription, setShowDescription] = useState(false);
   const [formattedTime, setFormattedTime] = useState("");
 
@@ -48,7 +48,7 @@ const DelayedDescription = ({ number, description, delay, color }) => {
             <h2 className="text-md font-semibold mb-2">{formattedTime}</h2>
           </div>
           <div className="border-t border-gray-300 mb-2"></div>
-          <p className="font-normal text-md ">{description}</p>
+          <p className="font-normal text-md " style={{color: color2}}>{description}</p>
         </div>
       )}
     </>
@@ -167,6 +167,7 @@ const Livepage = () => {
                           ? true
                           : false
                       }
+                      color2="black"
                       delay={delay * (46000 / 2808)} // Convert delay to milliseconds
                     />
                   );
@@ -184,6 +185,7 @@ const Livepage = () => {
                       color={
                         car_fire[number].usual_activity === false ? true : false
                       }
+                      color2="black"
                       delay={delay * (46000 / 2808)} // Convert delay to milliseconds
                     />
                   );
@@ -205,6 +207,7 @@ const Livepage = () => {
                           ? true
                           : false
                       }
+                      color2="black"
                       delay={delay * (46000 / 2808)} // Convert delay to milliseconds
                     />
                   );
@@ -232,6 +235,7 @@ const Livepage = () => {
                           ? false
                           : true
                       }
+                      color2="red"
                       delay={delay * (46000 / 2808)} // Convert delay to milliseconds
                     />
                   );
@@ -249,6 +253,7 @@ const Livepage = () => {
                       color={
                         car_fire[number].usual_activity === false ? false : true
                       }
+                      color2="red"
                       delay={delay * (46000 / 2808)} // Convert delay to milliseconds
                     />
                   );
@@ -270,6 +275,7 @@ const Livepage = () => {
                           ? false
                           : true
                       }
+                      color2="red"
                       delay={delay * (46000 / 2808)} // Convert delay to milliseconds
                     />
                   );

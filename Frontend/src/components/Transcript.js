@@ -27,7 +27,7 @@ const DelayedDescription = ({ number, description, delay, color }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowDescription(true);
-    }, delay);
+    }, 0);
     setFormattedTime(convertToMinutesAndSeconds(delay));
     return () => clearTimeout(timer);
   }, [delay]);
