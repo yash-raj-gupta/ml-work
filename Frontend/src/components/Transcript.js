@@ -7,6 +7,7 @@ import { useGlobalContext } from '../context/global';
 import mallActivityData from '../log_mall_activity.json'
 import car_fire from '../log_car_fire.json'
 import prison_fight from '../log_prison_fight.json'
+import shootingData from '../log_shooting.json'
 
 const DelayedDescription = ({ number, description, delay, color }) => {
   const [showDescription, setShowDescription] = useState(false);
@@ -63,6 +64,8 @@ function Transcript() {
   dataKeys = Object.keys(car_fire)}
   if(videos[videos.length -1]?.description === 'prison_fight.mp4'){ jsonname=prison_fight 
     dataKeys = Object.keys(prison_fight)}
+  if(videos[videos.length -1]?.description === 'shooting.mp4'){ jsonname=shootingData 
+    dataKeys = Object.keys(shootingData)}
   return (
     <>
       <Navbar active={4} />

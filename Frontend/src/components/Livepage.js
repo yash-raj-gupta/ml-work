@@ -14,6 +14,8 @@ import { useGlobalContext } from "../context/global";
 import mallActivityData from "../log_mall_activity.json";
 import car_fire from "../log_car_fire.json";
 import prison_fight from "../log_prison_fight.json";
+import shootingData from "../log_shooting.json";
+
 import Prompt from "./Prompt";
 
 const DelayedDescription = ({ number, description, delay, color, color2 }) => {
@@ -48,7 +50,9 @@ const DelayedDescription = ({ number, description, delay, color, color2 }) => {
             <h2 className="text-md font-semibold mb-2">{formattedTime}</h2>
           </div>
           <div className="border-t border-gray-300 mb-2"></div>
-          <p className="font-normal text-md " style={{color: color2}}>{description}</p>
+          <p className="font-normal text-md " style={{ color: color2 }}>
+            {description}
+          </p>
         </div>
       )}
     </>
@@ -60,6 +64,7 @@ const Livepage = () => {
   const dataKeys = Object.keys(mallActivityData);
   const dataKeys1 = Object.keys(car_fire);
   const dataKeys2 = Object.keys(prison_fight);
+  const dataKeys3 = Object.keys(shootingData);
 
   function selectFunc() {
     document.getElementById("one").style.display = "block";
@@ -133,7 +138,7 @@ const Livepage = () => {
               <Grid item style={LivePage_style2}>
                 <div className="rounded-3xl overflow-hidden drop-shadow-xl">
                   <ReactPlayer
-                    url={videos[videos.length - 2]?.videoUrl}
+                    url={videos[videos.length - 1]?.videoUrl}
                     playing={true}
                     loop={true}
                     height="288px"
@@ -212,6 +217,26 @@ const Livepage = () => {
                     />
                   );
                 })}
+
+                {dataKeys3.map((number, index) => {
+                  const currentNumber = Number(number);
+                  // Calculate delay as the difference between consecutive numbers
+                  const delay = currentNumber ? currentNumber : 0;
+                  return (
+                    <DelayedDescription
+                      key={index}
+                      number="CAM 4"
+                      description={shootingData[number]?.description || ""}
+                      color={
+                        shootingData[number].usual_activity === false
+                          ? true
+                          : false
+                      }
+                      color2="black"
+                      delay={delay * (46000 / 2808)} // Convert delay to milliseconds
+                    />
+                  );
+                })}
               </div>
             </div>
 
@@ -280,6 +305,25 @@ const Livepage = () => {
                     />
                   );
                 })}
+                {dataKeys3.map((number, index) => {
+                  const currentNumber = Number(number);
+                  // Calculate delay as the difference between consecutive numbers
+                  const delay = currentNumber ? currentNumber : 0;
+                  return (
+                    <DelayedDescription
+                      key={index}
+                      number="CAM 4"
+                      description={shootingData[number]?.description || ""}
+                      color={
+                        shootingData[number].usual_activity === false
+                          ? false
+                          : true
+                      }
+                      color2="red"
+                      delay={delay * (46000 / 2808)} // Convert delay to milliseconds
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -339,12 +383,13 @@ let LivePage_style2 = {
 const LivePage_SmallerContainer = {
   position: "relative",
   top: "40px",
+  display: "none",
+
   margin: "auto 30px",
 };
 const LivePage_SmallerContainer1 = {
   position: "relative",
   top: "40px",
-  display: "none",
   margin: " 30px auto",
 };
 

@@ -7,6 +7,7 @@ import mallActivityData from '../log_mall_activity.json'
 import car_fire from '../log_car_fire.json'
 import prison_fight from '../log_prison_fight.json'
 import "./LivePage.css";
+import shootingData from "../log_shooting.json"
 
 const convertToMinutesAndSeconds = (delay) => {
   const delayInSeconds = Math.floor(delay / 1000);
@@ -101,6 +102,19 @@ const DelayedDescription1 = ({delay,jsonname}) => {
           className='rounded-3xl min-h[158px] min-w-[186px]'
         />
     </div>)} 
+    {showDescription && jsonname===shootingData && 
+    (<div className="rounded-3xl mx-2 my-2 p-1 w-[250px] h-[188px]">
+      <div className='flex flex-row-reverse pr-4'>
+         <h2 className="text-lg font-semibold mb-2 ">{formattedTime}</h2>
+         </div>
+    <img
+          key={Math.floor(delay/1000)}
+          src={`shooting/img_${Math.floor(delay*(2808/46000))}.png`}
+          width={250}
+          height={188}
+          className='rounded-3xl min-h[158px] min-w-[186px]'
+        />
+    </div>)}
     </div> 
   );
 };
@@ -116,6 +130,8 @@ const Analysis = () => {
   dataKeys = Object.keys(car_fire)}
   if(videos[videos.length -1]?.description === 'prison_fight.mp4'){ jsonname=prison_fight 
     dataKeys = Object.keys(prison_fight)}
+  if(videos[videos.length -1]?.description === 'shooting.mp4'){ jsonname=shootingData 
+    dataKeys = Object.keys(shootingData)}
 
 
 

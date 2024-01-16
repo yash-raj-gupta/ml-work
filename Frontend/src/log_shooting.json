@@ -1,0 +1,106 @@
+{
+  "1": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "In the scene, there are two cars parked at a gas station. One car is parked at the pump, presumably to refuel, while the other car is parked nearby. The unusual aspect of this scene is that there is a person sitting in the driver's seat of the car parked at the pump, which is not a common sight at a gas station. Typically, people would exit the vehicle and attend to the pump themselves. The presence of the person in the driver's seat might indicate that they are waiting for someone or simply taking a break while refueling.",
+    "usual_activity": false
+  },
+  "62": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "The scene features a gas station with a black car parked next to a gas pump, presumably getting refueled. There are also two other cars in the scene, one parked further away and another one closer to the foreground. The unusual aspect of the scene is the presence of a person standing near the gas pump, possibly waiting for their turn to refuel or observing the process. This is not an uncommon sight at a gas station, but it adds a human element to the otherwise typical scene of cars and gas pumps.",
+    "usual_activity": false
+  },
+  "123": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "The scene features a petrol pump with a black car parked next to it, presumably getting refueled. There are also two other cars in the scene, one of which is parked further away from the petrol pump. The unusual aspect of the scene is the presence of a person standing near the petrol pump, possibly waiting for their turn to refuel or observing the process. This is not an uncommon sight, but it adds a human element to the otherwise typical gas station setting.",
+    "usual_activity": false
+  },
+  "184": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "The scene features a gas station with a black car parked next to a gas pump. There are also two other cars in the vicinity, one of which is a white car. A person is standing near the white car, possibly waiting for their turn to refuel or just observing the surroundings.The unusual aspect of the scene is that there is a person holding a gun, which is not a common sight at a gas station. This person is standing near the white car, and their presence with a weapon raises concerns about safety and the potential for a dangerous situation.",
+    "usual_activity": false
+  },
+  "245": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "The scene shows a corridor with a mat on the floor, which is unusual as mats are typically placed on the floor to provide comfort and warmth. The mat is located near a doorway, and there is a mat on the floor as well. The corridor appears to be empty, with no people or objects visible in the image. The presence of the mat on the floor might indicate that the area is being used for a specific purpose or event, or it could be a temporary arrangement.",
+    "usual_activity": false
+  },
+  "306": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "In the scene, there are two people standing in a corridor. One person is closer to the left side of the image, while the other person is located more towards the right side. They seem to be engaged in conversation or simply standing around. There is also a broken window in the scene, which is an unusual element. The broken window might be a result of an accident or vandalism, and it could potentially pose a safety risk or require repair.",
+    "usual_activity": true
+  },
+  "367": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "In the scene, there is a person walking down a corridor. The person is holding a cup in their hand, which suggests that they might be drinking from it. The unusual aspect of the scene is that the person is walking through a broken glass door, which is not a common occurrence. This could indicate that the door was recently damaged or vandalized, and the person is either walking through the broken door or has just entered the room.",
+    "usual_activity": true
+  },
+  "428": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "In the scene, a man is bending over and picking up a bottle from the ground. This action is unusual because it is not common for people to pick up bottles from the ground, especially in public spaces. The man's actions might suggest that he is concerned about cleanliness or the environment, or he could be trying to prevent the bottle from causing any harm or inconvenience to others. The presence of a broken window in the background adds to the unusual nature of the scene, as it indicates that there might have been an incident or an accident that led to the broken window.",
+    "usual_activity": true
+  },
+  "489": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "In the scene, a person is standing in a corridor, possibly a hallway or a sidewalk. They are bending over, possibly picking something up or looking at the ground. The unusual aspect of the scene is the presence of broken glass on the ground, which could be a result of an accident or vandalism. The person might be trying to avoid stepping on the broken glass or cleaning it up to prevent any injuries or further damage to the area.",
+    "usual_activity": true
+  },
+  "550": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "In the scene, there are two men standing in the street, one of them holding a gun. This is an unusual and potentially dangerous situation, as it involves the use of firearms in a public space. The presence of a car and a motorcycle in the scene suggests that the incident might be taking place in a busy area with traffic. The activities of the people in the scene, particularly the man with the gun, could pose a threat to the safety of others in the vicinity. It is important for authorities to address such situations promptly and ensure the safety of all individuals involved.",
+    "usual_activity": true
+  },
+  "611": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "In the scene, there is a white car parked at a gas station, and a man is standing next to it. Another man is walking towards the car, holding a gun. This is an unusual and potentially dangerous situation, as it is not common for people to carry guns in public spaces, especially near a gas station. The presence of guns in the scene suggests that there might be some tension or conflict between the individuals, and it is important for the authorities to intervene and ensure the safety of everyone involved.",
+    "usual_activity": true
+  },
+  "672": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "In the scene, there are two people holding guns, which is unusual and potentially dangerous. They are standing near a white car parked at a gas station. The presence of guns in this setting suggests that the individuals might be involved in some sort of conflict or tense situation. It is important to note that the image does not provide enough context to determine the exact circumstances or reasons behind the individuals' actions. However, it is clear that the situation is not typical for a gas station or a road scene, as people usually do not carry guns in such public spaces.",
+    "usual_activity": true
+  },
+  "733": {
+    "class_id": [],
+    "xyxy": [],
+    "score": [],
+    "tracker_id": [],
+    "description": "The scene features a street with a few vehicles, including a truck and a car. The truck is parked on the side of the road, while the car is driving down the street. There is also a dog walking down the street, adding a sense of liveliness to the scene. The presence of the dog and the vehicles on the street indicates that it is a typical urban environment where people and animals coexist and move about their daily activities.",
+    "usual_activity": false
+  }
+}
