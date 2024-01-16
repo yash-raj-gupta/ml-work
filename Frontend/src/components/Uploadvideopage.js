@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from '../context/global';
 import Navbar from "./Navbar";
-
+import Prompt from "./Prompt";
 
 function Uploadvideopage() {
   const [fileFormatError, setFileFormatError] = useState(false);
@@ -70,11 +70,11 @@ const handleUpload = async (e) => {
     <Navbar active={4}/>
     <div className="flex flex-col justify-center items-center">
       <h1 className="text-4xl font-bold mt-[130px]">Upload Video</h1>
-
+      
       <div className="flex flex-col w-[1124px] h-[323px] mt-[20px] border-[2px] border-purple-500 rounded-md rounded-10 justify-center items-center bg-purple-200 bg-opacity-100">
-        <div className="flex flex-col w-[1110px] h-[310px] border-dotted border-[2px] border-purple-500 rounded-md rounded-10  justify-center items-center bg-purple-200 bg-opacity-100">
-          <div className=" justify-center items-center w-[250px]  ">
-            
+        <div className="flex flex-row justify-center w-[1110px] h-[310px] border-dotted border-[2px] border-purple-500 rounded-md rounded-10   items-center bg-purple-200 bg-opacity-100">
+        
+          <div className=" justify-center items-center ml-[400px]  ">   
           <form onSubmit={handleUpload} action="api/upload" method='POST' encType='multipart/form-data'>
                 <div className="input-control upload-con">
                     <label htmlFor="video" className="hidden">Video</label>
@@ -106,11 +106,15 @@ const handleUpload = async (e) => {
                     </div>
                 </div>
             </form>
+           
             
           </div>
+          <div className="flex justify-end ml-[380px] mt-[-260px]"><Prompt/></div>
         </div>
       </div>
+     
     </div>
+    
     </>
   );
 }

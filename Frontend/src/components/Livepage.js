@@ -14,26 +14,41 @@ import { useGlobalContext } from '../context/global';
 import mallActivityData from '../log_mall_activity.json'
 import car_fire from '../log_car_fire.json'
 import prison_fight from '../log_prison_fight.json'
+import Prompt from "./Prompt";
 
 
 const DelayedDescription = ({ number, description, delay, color }) => {
   const [showDescription, setShowDescription] = useState(false);
+  const [formattedTime, setFormattedTime] = useState('');
+
+  const convertToMinutesAndSeconds = (delay) => {
+    const delayInSeconds = Math.floor(delay / 1000);
+    const minutes = Math.floor(delayInSeconds / 60);
+    const seconds = delayInSeconds % 60;
+
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowDescription(true);
     }, delay);
-
-    return () => clearTimeout(timer);
+    setFormattedTime(convertToMinutesAndSeconds(delay));
+        return () => clearTimeout(timer);
   }, [delay]);
 
   return (
     <>
-    { color && showDescription && <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
-       <h2 className="text-lg font-semibold mb-2">{number}</h2>
+    { color && showDescription && <div className="mx-2 my-3 p-4 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
+      <div className="flex justify-between">
+       <h2 className="text-md font-semibold mb-2">{number}</h2>
+       <h2 className="text-md font-semibold mb-2">{formattedTime}</h2>
+       </div>
       <div className="border-t border-gray-300 mb-2"></div>
-      <p className="font-normal">{description}</p>
-      <p>{color}</p>
+      <p className="font-normal text-md ">{description}</p>
     </div>}
     </>
   );
@@ -75,17 +90,20 @@ const Livepage = () => {
     <>
     <Navbar active={1}/>
       <Grid container lg={12}>
-        <Grid item lg={8.8} md={9} xm={8}>
+        <Grid item lg={7.8} md={9} xm={8}>
           <div id="one" style={LivePage_SmallerContainer}>
             <Grid container style={LivePage_style} spacing={2}>
-              {videos.slice(5,14).map((video) => (
+              {videos.slice(-9).map((video) => (
                 <Grid item key={video.title}>
                   <div className="rounded-3xl overflow-hidden drop-shadow-lg">
                   <ReactPlayer
-                    url={video.videoUrl}
+                    url={video?.videoUrl}
                     height="168px"
-                    width="309px"
+                    width="279px"
                     controls
+                    playing={true}
+                    playsinline={true}
+                    loop={true}
                   />
                   </div>
                 </Grid>
@@ -94,14 +112,17 @@ const Livepage = () => {
           </div>
           <div id="four" style={LivePage_SmallerContainer1}>
             <Grid container style={LivePage_style1} spacing={4} lg={10} md={12}>
-              {videos.slice(0, 4).map((video) => (
+              {videos.slice(-4).map((video) => (
                 <Grid item key={video.title}>
                   <div className="rounded-3xl overflow-hidden drop-shadow-lg">
                   <ReactPlayer
-                    url={video.videoUrl}
+                    url={video?.videoUrl}
                     height="208px"
                     width="329px"
                     controls
+                    playing={true}
+                    playsinline={true}
+                    loop={true}
                   />
                   </div>
                 </Grid>
@@ -110,11 +131,13 @@ const Livepage = () => {
           </div>
           <div id="nine" style={LivePage_SmallerContainer2}>
             <Grid container style={LivePage_style} spacing={1}>
-              <Grid item style={LivePage_style2}>
+              <Grid item style={LivePage_style2} >
                <div className="rounded-3xl overflow-hidden drop-shadow-xl">
-                <ReactPlayer url={videos[9].videoUrl} 
+                <ReactPlayer url={videos[videos.length -2]?.videoUrl} 
+              playing={true}
+              loop={true}
                 height="288px"
-                width="509px"
+                width="489px"
                 controls
                 />
                 </div>
@@ -122,14 +145,14 @@ const Livepage = () => {
             </Grid>
           </div>
         </Grid>
-        <Grid item lg={3.2} md={3} xm={4}>
+        <Grid item lg={4.2} md={3} xm={4}>
           <div className="LivePage_color">
 
 
 
             <div className="LivePage_outer_div">
-              <h4 className="LivePage_title">Transcriptions</h4>
-                 <div id="LivePage_outer_div" className=" bg-[#ECD3FF]  overflow-y-auto overflow-y:scroll">
+              <h4 className="LivePage_title font-semibold">Transcriptions</h4>
+                 <div id="LivePage_outer_div" className=" bg-[#ECD3FF] p-6 overflow-y-auto overflow-y:scroll">
 
                  {dataKeys.map((number, index) => {
               const currentNumber = Number(number);
@@ -183,8 +206,8 @@ const Livepage = () => {
 
 
             <div className="LivePage_outer_div">
-              <h4 className="LivePage_title">Unusual Activity</h4>
-              <div id="LivePage_outer_div" className=" bg-[#ECD3FF]  overflow-y-auto overflow-y:scroll">
+              <h4 className="LivePage_title font-semibold">Unusual Activity</h4>
+              <div id="LivePage_outer_div" className=" bg-[#ECD3FF] p-6 overflow-y-auto overflow-y:scroll">
                {dataKeys.map((number, index) => {
               const currentNumber = Number(number);
               // Calculate delay as the difference between consecutive numbers
@@ -255,6 +278,11 @@ const Livepage = () => {
             style={{ color: "#fffafb" }}
           />
         </Button>
+        <Button> 
+        <div className="mb-7 ml-[710px] ">
+        <Prompt/>
+        </div>
+         </Button>
       </Appbar>
     </>
   );
@@ -264,7 +292,7 @@ let Appbar = styled(Box)`
   bottom: 1px;
   position: fixed;
   height: 40px;
-  width: 73.4%;
+  width: 65%;
   padding: 1px 20px;
 `;
 let LivePage_style = {
