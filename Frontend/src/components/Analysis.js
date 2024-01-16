@@ -35,12 +35,12 @@ const DelayedDescription = ({ number, description, delay, color }) => {
   return (
     <>
     {color==='red' && showDescription && <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
-       <h2 className="text-lg font-semibold mb-2">{Math.floor(delay/1000)} seconds</h2>
+       <h2 className="text-lg font-semibold mb-2">{formattedTime}</h2>
       <div className="border-t border-gray-300 mb-2"></div>
       <p className="font-normal text-red-500">{description}</p>
     </div>}
     {color==='black' && showDescription && <div className="mx-2 my-3 p-2 bg-[#FFFFFF] rounded-xl drop-shadow-xl">
-       <h2 className="text-lg font-semibold mb-2">{Math.floor(delay/1000)} seconds</h2>
+       <h2 className="text-lg font-semibold mb-2">{formattedTime}</h2>
 
       <div className="border-t border-gray-300 mb-2"></div>
       <p className="font-normal">{description}</p>
@@ -60,18 +60,25 @@ const DelayedDescription1 = ({delay,jsonname}) => {
   }, [delay]);
 
   return (
-    <>
-    {showDescription && jsonname===mallActivityData && <div className="rounded-3xl mx-2 my-2 ">
+    <div>
+    {showDescription && jsonname===mallActivityData && 
+    (<div className="rounded-3xl mx-2 my-2 ">
     <img
           key={Math.floor(delay/1000)}
           src={`mallActivityData/img_${Math.floor(delay*(2808/46000))}.png`}
+          width={250}
+          height={188}
+          className='rounded-3xl min-h[188px] min-w-[250px]'
         />
-    </div>}
+    </div>)}
 
     {showDescription && jsonname===prison_fight && <div className="rounded-3xl mx-2 my-2 ">
     <img
           key={Math.floor(delay/1000)}
           src={`prison_fight/img_${Math.floor(delay*(2808/46000))}.png`}
+          width={250}
+          height={188}
+          className='rounded-3xl min-h[168px] min-w-[250px]'
         />
     </div>}
 
@@ -79,9 +86,12 @@ const DelayedDescription1 = ({delay,jsonname}) => {
     <img
           key={Math.floor(delay/1000)}
           src={`car_fire/img_${Math.floor(delay*(2808/46000))}.png`}
+          width={250}
+          height={188}
+          className='rounded-3xl min-h[188px] min-w-[250px]'
         />
     </div>} 
-    </> 
+    </div> 
   );
 };
 
@@ -91,11 +101,13 @@ const Analysis = () => {
   const {videos} = useGlobalContext();
   
   let jsonname=mallActivityData;
+  let dataKeys = Object.keys(mallActivityData);
+  if(videos[videos.length -1]?.description === 'car_fire.mp4'){ jsonname=car_fire
+  dataKeys = Object.keys(car_fire)}
+  if(videos[videos.length -1]?.description === 'prison_fight.mp4'){ jsonname=prison_fight 
+    dataKeys = Object.keys(prison_fight)}
 
-  if(videos[videos.length -1].description === 'car_fire.mp4'){ jsonname=car_fire}
-  if(videos[videos.length -1].description === 'prison_fight.mp4'){ jsonname=prison_fight}
-
-  const dataKeys = Object.keys(jsonname);
+  
 
   const videoTimestamps = [
     { start: 0, end: 10 },
@@ -123,12 +135,15 @@ const Analysis = () => {
         <div className=" mb-2 flex justify-between h-[390px]">
           <div className=" mt-5">
             <h1 className="mb-3 text-medium text-[25px]">Uploaded Video</h1>
-            <div className="rounded-3xl overflow-hidden drop-shadow-xl">
+            <div className="rounded-3xl drop-shadow-xl overflow-hidden">
               <ReactPlayer
-              url={videos[videos.length -1].videoUrl}
+              url={videos[videos.length -1]?.videoUrl}
                 playing={true}
                 width="539px"
                 height="292px"
+                loop ={true}
+                controls={false}
+                className='min-w-[539px] min-h-[292px] rounded-3xl overflow-hidden'
               />
             </div>
           </div>
@@ -146,7 +161,7 @@ const Analysis = () => {
               return (
                 <DelayedDescription
                   key={index}
-                  number={videos[videos.length -1].filename}
+                  number={videos[videos.length -1]?.filename}
                   description={jsonname[number]?.description || ''}
                   color={jsonname[number].usual_activity===false?'black':'red'}
                   delay={delay * (46000/2808)} // Convert delay to milliseconds
@@ -161,7 +176,7 @@ const Analysis = () => {
           <h1 className="text-medium text-[25px] mb-2">
             Recorded Unusal Activities
           </h1>
-          <div className="flex overflow-x-auto">
+          <div className="flex overflow-y-auto">
 
 
           {dataKeys.map((number, index) => {

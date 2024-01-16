@@ -96,18 +96,11 @@ const Livepage = () => {
             <Grid container style={LivePage_style1} spacing={4} lg={10} md={12}>
               {videos.slice(0, 4).map((video) => (
                 <Grid item key={video.title}>
-<<<<<<< HEAD
-                  <ReactPlayer
-                    url={video.videoUrl}
-                    height="100%"
-                    width="100%"
-=======
                   <div className="rounded-3xl overflow-hidden drop-shadow-lg">
                   <ReactPlayer
                     url={video.videoUrl}
                     height="208px"
                     width="329px"
->>>>>>> 8e6485df521697a8940fcc229be827ba53d93e52
                     controls
                   />
                   </div>
