@@ -50,7 +50,7 @@ const DelayedDescription = ({ number, description, delay, color }) => {
     </>
   );
 };
-const DelayedDescription1 = ({delay,jsonname}) => {
+const DelayedDescription1 = ({delay,color,fps,jsonname}) => {
   const [showDescription, setShowDescription] = useState(false);
   const [formattedTime, setFormattedTime] = useState('');
   useEffect(() => {
@@ -63,53 +63,53 @@ const DelayedDescription1 = ({delay,jsonname}) => {
 
   return (
     <div>
-    {showDescription && jsonname===mallActivityData && 
+    {color==='red' && showDescription && jsonname===mallActivityData && 
     (<div className="rounded-3xl mx-2 my-2 p-1 w-[250px] h-[188px]">
       <div className='flex flex-row-reverse pr-4'>
          <h2 className="text-lg font-semibold mb-2 ">{formattedTime}</h2>
          </div>
     <img
           key={Math.floor(delay/1000)}
-          src={`mallActivityData/img_${Math.floor(delay*(2808/46000))}.png`}
+          src={`mallActivityData/img_${Math.floor(fps)}.png`}
           width={250}
           height={188}
           className='rounded-3xl min-h[158px] min-w-[186px]'
         />
     </div>)}
 
-    {showDescription && jsonname===prison_fight && (<div className="rounded-3xl mx-2 my-2 p-1 w-[250px] h-[188px]">
+    {color==='red' && showDescription && jsonname===prison_fight && (<div className="rounded-3xl mx-2 my-2 p-1 w-[250px] h-[188px]">
       <div className='flex flex-row-reverse pr-4'>
          <h2 className="text-lg font-semibold mb-2 ">{formattedTime}</h2>
          </div>
     <img
           key={Math.floor(delay/1000)}
-          src={`prison_fight/img_${Math.floor(delay*(2808/46000))}.png`}
+          src={`prison_fight/img_${Math.floor(fps)}.png`}
           width={250}
           height={188}
           className='rounded-3xl min-h[158px] min-w-[186px]'
         />
     </div>)}
 
-    {showDescription && jsonname===car_fire && (<div className="rounded-3xl mx-2 my-2 p-1 w-[250px] h-[188px]">
+    {color==='red' && showDescription && jsonname===car_fire && (<div className="rounded-3xl mx-2 my-2 p-1 w-[250px] h-[188px]">
       <div className='flex flex-row-reverse pr-4'>
          <h2 className="text-lg font-semibold mb-2 ">{formattedTime}</h2>
          </div>
     <img
           key={Math.floor(delay/1000)}
-          src={`car_fire/img_${Math.floor(delay*(2808/46000))}.png`}
+          src={`car_fire/img_${Math.floor(fps)}.png`}
           width={250}
           height={188}
           className='rounded-3xl min-h[158px] min-w-[186px]'
         />
     </div>)} 
-    {showDescription && jsonname===shootingData && 
+    {color==='red' && showDescription && jsonname===shootingData && 
     (<div className="rounded-3xl mx-2 my-2 p-1 w-[250px] h-[188px]">
       <div className='flex flex-row-reverse pr-4'>
          <h2 className="text-lg font-semibold mb-2 ">{formattedTime}</h2>
          </div>
     <img
           key={Math.floor(delay/1000)}
-          src={`shooting/img_${Math.floor(delay*(2808/46000))}.png`}
+          src={`shooting/img_${Math.floor(fps)}.png`}
           width={250}
           height={188}
           className='rounded-3xl min-h[158px] min-w-[186px]'
@@ -125,13 +125,17 @@ const Analysis = () => {
   const {videos} = useGlobalContext();
   
   let jsonname=mallActivityData;
+  let fps=(46000/2808) ;
   let dataKeys = Object.keys(mallActivityData);
   if(videos[videos.length -1]?.description === 'car_fire.mp4'){ jsonname=car_fire
-  dataKeys = Object.keys(car_fire)}
+  dataKeys = Object.keys(car_fire)
+  fps=173000/10251}
   if(videos[videos.length -1]?.description === 'prison_fight.mp4'){ jsonname=prison_fight 
-    dataKeys = Object.keys(prison_fight)}
+    dataKeys = Object.keys(prison_fight)
+    fps=61000/1543}
   if(videos[videos.length -1]?.description === 'shooting.mp4'){ jsonname=shootingData 
-    dataKeys = Object.keys(shootingData)}
+    dataKeys = Object.keys(shootingData)
+    fps=12000/738}
 
 
 
@@ -178,7 +182,7 @@ const Analysis = () => {
                   number={videos[videos.length -1]?.filename}
                   description={jsonname[number]?.description || ''}
                   color={jsonname[number].usual_activity===false?'black':'red'}
-                  delay={delay * (46000/2808)} // Convert delay to milliseconds
+                  delay={delay * fps} // Convert delay to milliseconds
                 />
                 
               );
@@ -202,7 +206,9 @@ const Analysis = () => {
 
               return (
                 <DelayedDescription1
-                  delay={delay * (46000/2808)} // Convert delay to milliseconds
+                  delay={delay * fps} // Convert delay to milliseconds
+                  color={jsonname[number].usual_activity===false?'black':'red'}
+                  fps={delay}
                   jsonname={jsonname}
                 />
               );
