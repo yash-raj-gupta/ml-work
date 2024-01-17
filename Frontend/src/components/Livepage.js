@@ -191,7 +191,7 @@ const Livepage = () => {
                         car_fire[number].usual_activity === false ? true : false
                       }
                       color2="black"
-                      delay={delay * (46000 / 2808)} // Convert delay to milliseconds
+                      delay={delay * (173000/10251)} // Convert delay to milliseconds
                     />
                   );
                 })}
@@ -213,7 +213,7 @@ const Livepage = () => {
                           : false
                       }
                       color2="black"
-                      delay={delay * (46000 / 2808)} // Convert delay to milliseconds
+                      delay={delay * (61000/1543)} // Convert delay to milliseconds
                     />
                   );
                 })}
@@ -233,7 +233,7 @@ const Livepage = () => {
                           : false
                       }
                       color2="black"
-                      delay={delay * (46000 / 2808)} // Convert delay to milliseconds
+                      delay={delay * (12000/738)} // Convert delay to milliseconds
                     />
                   );
                 })}
@@ -279,7 +279,7 @@ const Livepage = () => {
                         car_fire[number].usual_activity === false ? false : true
                       }
                       color2="red"
-                      delay={delay * (46000 / 2808)} // Convert delay to milliseconds
+                      delay={delay * (173000/10251)} // Convert delay to milliseconds
                     />
                   );
                 })}
@@ -301,7 +301,7 @@ const Livepage = () => {
                           : true
                       }
                       color2="red"
-                      delay={delay * (46000 / 2808)} // Convert delay to milliseconds
+                      delay={delay * (61000/1543)} // Convert delay to milliseconds
                     />
                   );
                 })}
@@ -320,7 +320,7 @@ const Livepage = () => {
                           : true
                       }
                       color2="red"
-                      delay={delay * (46000 / 2808)} // Convert delay to milliseconds
+                      delay={delay * (12000/738)} // Convert delay to milliseconds
                     />
                   );
                 })}

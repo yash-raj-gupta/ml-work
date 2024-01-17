@@ -57,15 +57,19 @@ function Transcript() {
     return navigate("/analysis");
   }
   const {videos} = useGlobalContext();
-  
+  let fps=(46000/2808) ;
   let jsonname=mallActivityData;
   let dataKeys = Object.keys(mallActivityData);
+
   if(videos[videos.length -1]?.description === 'car_fire.mp4'){ jsonname=car_fire
-  dataKeys = Object.keys(car_fire)}
+  dataKeys = Object.keys(car_fire)
+  fps=173000/10251}
   if(videos[videos.length -1]?.description === 'prison_fight.mp4'){ jsonname=prison_fight 
-    dataKeys = Object.keys(prison_fight)}
+    dataKeys = Object.keys(prison_fight)
+    fps=61000/1543}
   if(videos[videos.length -1]?.description === 'shooting.mp4'){ jsonname=shootingData 
-    dataKeys = Object.keys(shootingData)}
+    dataKeys = Object.keys(shootingData)
+    fps=12000/738}
   return (
     <>
       <Navbar active={4} />
@@ -91,7 +95,7 @@ function Transcript() {
                   number={videos[videos.length -1]?.filename}
                   description={jsonname[number]?.description || ''}
                   color={jsonname[number].usual_activity===false?'black':'red'}
-                  delay={delay * (46000/2808)} // Convert delay to milliseconds
+                  delay={delay * (fps)} // Convert delay to milliseconds
                 />
               );
             })}
