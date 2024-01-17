@@ -96,27 +96,30 @@ const Livepage = () => {
       <Grid container lg={12}>
         <Grid item lg={7.8} md={9} xm={8}>
           <div id="one" style={LivePage_SmallerContainer}>
-            <Grid container style={LivePage_style} spacing={2}>
-              {videos.slice(-9).map((video) => (
+            <Grid container style={LivePage_style} spacing={1}>
+              {videos.slice(-9).map((video, index) => (
                 <Grid item key={video.title}>
                   <div className="rounded-3xl overflow-hidden drop-shadow-lg">
                     <ReactPlayer
                       url={video?.videoUrl}
-                      height="168px"
-                      width="279px"
+                      height="148px"
+                      width="259px"
                       controls
                       playing={true}
                       playsinline={true}
                       loop={true}
                     />
+                       
                   </div>
+                  <div className="flex justify-center"> <h1 className="font-semibold">CAM {index+1}</h1>
+                 </div>
                 </Grid>
               ))}
             </Grid>
           </div>
           <div id="four" style={LivePage_SmallerContainer1}>
-            <Grid container style={LivePage_style1} spacing={4} lg={10} md={12}>
-              {videos.slice(-4).map((video) => (
+            <Grid container style={LivePage_style1} spacing={2} lg={10} md={12}>
+              {videos.slice(0,4).map((video, index) => (
                 <Grid item key={video.title}>
                   <div className="rounded-3xl overflow-hidden drop-shadow-lg">
                     <ReactPlayer
@@ -129,14 +132,16 @@ const Livepage = () => {
                       loop={true}
                     />
                   </div>
+                  <div className="flex justify-center"> <h1 className="font-semibold">CAM {index+1}</h1>
+                 </div>
                 </Grid>
               ))}
             </Grid>
           </div>
           <div id="nine" style={LivePage_SmallerContainer2}>
-            <Grid container style={LivePage_style} spacing={1}>
-              <Grid item style={LivePage_style2}>
-                <div className="rounded-3xl overflow-hidden drop-shadow-xl">
+            <Grid container style={LivePage_style} spacing={4}>
+              <Grid item style={LivePage_style2} >
+                <div className="rounded-3xl overflow-hidden drop-shadow-xl mr-10 mt-10">
                   <ReactPlayer
                     url={videos[videos.length - 1]?.videoUrl}
                     playing={true}
@@ -239,7 +244,6 @@ const Livepage = () => {
                 })}
               </div>
             </div>
-
             <div className="LivePage_outer_div">
               <h4 className="LivePage_title font-semibold">Unusual Activity</h4>
               <div
